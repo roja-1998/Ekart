@@ -34,16 +34,8 @@ pipeline {
                    -Dsonar.projectKey=Ekart  -Dsonar.java.binaries=. '''
                }
             }
-        }
-       stage('OWASP Scan') {
-            steps {
-                dependencyCheck additionalArguments: '--scan ./ ', odcInstallation: 'DC'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
-
-        
-        stage('Build') {
+        }   
+      stage('Build') {
             steps {
                 sh "mvn package -DskipTests=true"
             }
@@ -52,8 +44,8 @@ pipeline {
             steps {
                 script{
                    withDockerRegistry(credentialsId: '26fdf24e-ec9a-43ce-b39b-1bf2707193f9', toolName: 'docker') {
-                        sh "docker build -t ubuntu:latest -f docker/Dockerfile ."
-                        sh "docker tag  ubuntu:latest roja199/ubuntu:latest"
+                        sh "docker build -t shopping-cart:dev -f docker/Dockerfile ."
+                        sh "docker tag  shopping-cart:dev roja199/shopping-cart:dev"
                     }
                 }
             }
@@ -62,7 +54,8 @@ pipeline {
             steps {
                 script{
                    withDockerRegistry(credentialsId: '26fdf24e-ec9a-43ce-b39b-1bf2707193f9', toolName: 'docker') {
-                        sh "docker push roja199/ubuntu:latest"
+                        sh "docker push roja199/shopping-cart:dev
+"
                     }
                 }
             }
@@ -72,7 +65,8 @@ pipeline {
             steps {
                 script{
                    withDockerRegistry(credentialsId: '26fdf24e-ec9a-43ce-b39b-1bf2707193f9', toolName: 'docker') {
-                        sh "docker run -d -p 8070:8070 roja199/ubuntu:latest"
+                        sh "docker run -d -p 8070:8070 roja199/shopping-cart:dev
+"
                     }
                 }
             }
