@@ -21,7 +21,7 @@ pipeline {
                 sh "mvn compile"
             }
         }
-        stage('COMPILE') {
+        stage('Test') {
             steps {
                 sh "mvn test -DskipTests=true"
             }
