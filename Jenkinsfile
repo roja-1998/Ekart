@@ -9,7 +9,7 @@ pipeline {
         SCANNER_HOME= tool 'sonar-scanner'
     }
     
-    stages {
+    Stages {
         stage('Git Checkout') {
             steps {
               git branch: 'main', url: 'https://github.com/roja-1998/Ekart.git'
