@@ -54,8 +54,7 @@ pipeline {
             steps {
                 script{
                    withDockerRegistry(credentialsId: '26fdf24e-ec9a-43ce-b39b-1bf2707193f9', toolName: 'docker') {
-                        sh "docker push roja199/shopping-cart:dev
-"
+                        sh "docker push roja199/shopping-cart:dev"
                     }
                 }
             }
