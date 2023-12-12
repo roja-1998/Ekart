@@ -53,7 +53,7 @@ pipeline {
                 script{
                    withDockerRegistry(credentialsId: '26fdf24e-ec9a-43ce-b39b-1bf2707193f9', toolName: 'docker') {
                         sh "docker build -t shopping-cart:dev -f docker/Dockerfile ."
-                        sh "docker tag  shopping-cart:dev roja1998/shopping-cart:dev"
+                        sh "docker tag  shopping-cart:dev roja199/shopping-cart:dev"
                     }
                 }
             }
@@ -62,7 +62,7 @@ pipeline {
             steps {
                 script{
                    withDockerRegistry(credentialsId: '26fdf24e-ec9a-43ce-b39b-1bf2707193f9', toolName: 'docker') {
-                        sh "docker push roja1998/shopping-cart:dev"
+                        sh "docker push roja199/shopping-cart:dev"
                     }
                 }
             }
@@ -71,7 +71,7 @@ pipeline {
             steps {
                 script{
                    withDockerRegistry(credentialsId: '26fdf24e-ec9a-43ce-b39b-1bf2707193f9', toolName: 'docker') {
-                        sh "docker run -d -p 8070:8070 roja1998/shopping-cart:dev"
+                        sh "docker run -d -p 8070:8070 roja199/shopping-cart:dev"
                     }
                 }
             }
