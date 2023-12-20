@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-              git branch: 'main', url: 'https://github.com/roja-1998/Ekart.git'
+             git branch: 'main', credentialsId: 'github-cred', url: 'https://github.com/roja-1998/Ekart.git'
             }
         }
         
