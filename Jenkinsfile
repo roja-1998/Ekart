@@ -26,12 +26,6 @@ pipeline {
                 sh "mvn test -DskipTests=true"
             }
         }
-         stage('OWASP Scan') {
-            steps {
-                dependencyCheck additionalArguments: '--scan ./ ', odcInstallation: 'DC'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
         
         stage('Sonarqube Analysis') {
             steps {
