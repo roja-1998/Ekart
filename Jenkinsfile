@@ -43,7 +43,7 @@ pipeline {
         stage('Docker Build & Tag') {
             steps {
                 script{
-                   withDockerRegistry(credentialsId: 'docker-cred') {
+                   withDockerRegistry(credentialsId: 'docker') {
                         sh "docker build -t shopping-cart:dev -f docker/Dockerfile ."
                         sh "docker tag  shopping-cart:dev roja199/shopping-cart:dev"
                     }
@@ -53,7 +53,7 @@ pipeline {
         stage('Push Docker Images') {
             steps {
                 script{
-                   withDockerRegistry(credentialsId: 'docker-cred') {
+                  withDockerRegistry(credentialsId: 'docker') {
                         sh "docker push roja199/shopping-cart:dev"
                     }
                 }
@@ -63,7 +63,7 @@ pipeline {
          stage('Deploy Docker Container') {
             steps {
                 script{
-                   withDockerRegistry(credentialsId: 'docker-cred') {
+                  withDockerRegistry(credentialsId: 'docker') {
                         sh "docker run -d -p 8070:8070 roja199/shopping-cart:dev"
                     }
                 }
